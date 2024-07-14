@@ -2,6 +2,8 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from django_filters import rest_framework as filters
+
+from utils.LatestRecordsPagination import LatestRecordsPagination
 from .models import Burning, Merchant
 from .serializers import BurningSerializer, MerchantSerializer
 from .filters import BurningFilter, MerchantFilter
@@ -14,6 +16,7 @@ class BurningViewSet(mixins.ListModelMixin,
     serializer_class = BurningSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = BurningFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -29,6 +32,7 @@ class MerchantViewSet(mixins.ListModelMixin,
     serializer_class = MerchantSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = MerchantFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data

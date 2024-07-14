@@ -2,6 +2,8 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from django_filters import rest_framework as filters
+
+from utils.LatestRecordsPagination import LatestRecordsPagination
 from .models import AddVoting, NodeReward, NodeWithdraw
 from .serializers import AddVotingSerializer, NodeRewardSerializer, NodeWithdrawSerializer
 from .filters import AddVotingFilter, NodeRewardFilter, NodeWithdrawFilter
@@ -14,6 +16,7 @@ class AddVotingViewSet(mixins.ListModelMixin,
     serializer_class = AddVotingSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = AddVotingFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -29,6 +32,7 @@ class NodeRewardViewSet(mixins.ListModelMixin,
     serializer_class = NodeRewardSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = NodeRewardFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -44,6 +48,7 @@ class NodeWithdrawViewSet(mixins.ListModelMixin,
     serializer_class = NodeWithdrawSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = NodeWithdrawFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data

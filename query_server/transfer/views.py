@@ -2,6 +2,8 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from django_filters import rest_framework as filters
+
+from utils.LatestRecordsPagination import LatestRecordsPagination
 from .models import D9Transfer, USDTTransfer
 from .serializers import D9TransferSerializer, USDTTransferSerializer
 from .filters import D9TransferFilter, USDTTransferFilter
@@ -14,6 +16,7 @@ class D9TransferViewSet(mixins.ListModelMixin,
     serializer_class = D9TransferSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = D9TransferFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -29,6 +32,7 @@ class USDTTransferViewSet(mixins.ListModelMixin,
     serializer_class = USDTTransferSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = USDTTransferFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data

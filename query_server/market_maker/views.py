@@ -2,6 +2,8 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from django_filters import rest_framework as filters
+
+from utils.LatestRecordsPagination import LatestRecordsPagination
 from .models import Transaction
 from .serializers import TransactionSerializer
 from .filters import TransactionFilter
@@ -15,6 +17,7 @@ class TransactionViewSet(mixins.ListModelMixin,
     serializer_class = TransactionSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = TransactionFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data

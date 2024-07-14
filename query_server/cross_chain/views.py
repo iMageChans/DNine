@@ -2,6 +2,8 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from django_filters import rest_framework as filters
+
+from utils.LatestRecordsPagination import LatestRecordsPagination
 from .models import Commit, Dispatch
 from .serializers import CommitSerializer, DispatchSerializer
 from .filters import CommitFilter, DispatchFilter
@@ -14,6 +16,7 @@ class CommitViewSet(mixins.ListModelMixin,
     serializer_class = CommitSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = CommitFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -30,6 +33,7 @@ class DispatchViewSet(mixins.ListModelMixin,
     serializer_class = DispatchSerializer
     filter_backends = (filters.DjangoFilterBackend, rest_filters.OrderingFilter)
     filterset_class = DispatchFilter
+    pagination_class = LatestRecordsPagination
 
     def create(self, request, *args, **kwargs):
         data = request.data

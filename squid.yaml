@@ -1,0 +1,16 @@
+manifestVersion: subsquid.io/v0.1
+name: d9_index_service
+version: 1
+description: Substrate squid template
+build: 
+deploy:
+  addons:
+    postgres:
+  processor:
+    cmd:
+      - sqd
+      - process
+  api:
+    cmd:
+      - sqd
+      - serve:prod

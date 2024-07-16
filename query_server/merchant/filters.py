@@ -20,7 +20,7 @@ class PaymentFilter(filters.FilterSet):
 
 
 class SubscribeFilter(filters.FilterSet):
-    account_id = filters.CharFilter(field_name='data__account_id', lookup_expr='icontains')
+    account_id = filters.CharFilter(field_name='data__accountId', lookup_expr='icontains')
 
     class Meta:
         model = Subscribe

@@ -2,7 +2,6 @@ from rest_framework import viewsets, mixins, status
 from rest_framework.response import Response
 from rest_framework import filters as rest_filters
 from django_filters import rest_framework as filters
-from django_filters.rest_framework import DjangoFilterBackend
 
 from utils.LatestRecordsPagination import LatestRecordsPagination
 from .models import D9Transfer, USDTTransfer
@@ -25,9 +24,6 @@ class D9TransferViewSet(mixins.ListModelMixin,
         instance, created = D9Transfer.create_or_update(data)
         serializer = self.get_serializer(instance)
         return Response(serializer.data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
 
 
 class USDTTransferViewSet(mixins.ListModelMixin,
